@@ -23,6 +23,10 @@ const firebaseConfig = {
   measurementId: "G-D1L7TJXQZ0"
 };
 
+const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const regexSenha = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/;
+
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
@@ -35,6 +39,7 @@ window.trocarAba = function(aba) {
   const tabLogin     = document.getElementById("tabLogin");
   const tabRegistro  = document.getElementById("tabRegistro");
   const indicator    = document.getElementById("tabIndicator");
+
 
   if (aba === "login") {
     formLogin.classList.remove("hidden");
@@ -87,6 +92,24 @@ document.getElementById("btnRegistro").addEventListener("click", async () => {
     mostrarMensagem("msgRegistro", "Senha deve ter no mínimo 6 caracteres.", "erro");
     return;
   }
+  function validarEmail(email){
+    return regexEmail.test(email)
+  }
+  if (!validarEmail(email)) {
+    mostrarMensagem("msgRegistro", "Email invalido.", "erro");
+    return;
+  }
+  function validarSenhaForte(senha){
+    return regexSenha.test(senha)
+  }
+  if (!validarSenhaForte(senha)) {
+    mostrarMensagem("msgRegistro", "Senha fraca! Tenha no mínimo 1 caractere especial, 1 numero, e 1 letra maiúscula.", "erro");
+    return;
+  }
+  if (nome.length < 1){
+    mostrarMensagem("msgRegistro", "Nome invalido. Deve ter no mínimo 2 caracteres", "erro");
+    return;
+  }
 
   setLoading("btnRegistro", true);
 
@@ -109,6 +132,8 @@ document.getElementById("btnRegistro").addEventListener("click", async () => {
       role: "user",
       dataCriacao: new Date()
     });
+
+    
 
     mostrarMensagem("msgRegistro", "Conta criada! Faça login.", "sucesso");
 

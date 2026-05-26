@@ -132,8 +132,36 @@ async function carregarUsuarios() {
   }
 
 }
+  // GRAFICS EM BARRA
+try {
+
+  const snapshot = await getDocs(
+    collection(db, "usuarios")
+  );
+
+  let usuarios = 0;
+  snapshot.forEach((doc) => {
+    const user = doc.data();
+    if(user.role === "user"){
+      usuarios++;
+    }
+  });
 
 
+  // PEGA A BARRA
+  const barra =
+    document.getElementById("barraUsuarios");
+
+  // DEFINE ALTURA
+  barra.style.height =
+    `${usuarios * 15}px`;
+    
+  // MOSTRA QUANTIDADE
+  barra.textContent = usuarios;
+
+} catch (err) {
+  console.error(err);
+}
 
 // EXECUTA
 carregarUsuarios();
