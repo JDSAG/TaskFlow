@@ -1,205 +1,342 @@
-*{
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body{
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: #f4f4f4;
-  color: #333;
-  transition: 0.3s;
+:root {
+  --primary: #4f46e5;
+  --primary-hover: #372fcf;
+  --bg: #f4f4f4;
+  --card: #ffffff;
+  --text: #1a1a2e;
+  --text-muted: #6b7280;
+  --border: #e5e7eb;
+  --success: #16a34a;
+  --danger: #dc2626;
+  --danger-hover: #b91c1c;
+  --shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
   min-height: 100vh;
-
   display: flex;
   flex-direction: column;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-header{
-  background-color: #4f46e5;
+/* =====================
+   HEADER
+===================== */
+header {
+  background-color: var(--primary);
   color: white;
-  padding: 20px;
-
+  padding: 16px 32px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
+  gap: 12px;
+  box-shadow: 0 2px 12px rgba(79, 70, 229, 0.3);
 }
 
-header h1{
-  font-size: 28px;
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-#btnDark{
-  padding: 10px 15px;
+.brand span {
+  font-size: 24px;
+}
+
+.brand h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.usuario-nome {
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0.9;
+  background: rgba(255,255,255,0.15);
+  padding: 6px 12px;
+  border-radius: 20px;
+}
+
+#btnDark {
+  padding: 8px 12px;
   border: none;
   border-radius: 8px;
+  background: rgba(255,255,255,0.15);
   cursor: pointer;
-  font-weight: bold;
-  transition: 0.3s;
-  background-color: transparent;
-
-}
-
-#btnDark:hover{
-  transform: scale(1.05);
-  color: #333;
-}
-
-main{
-  flex: 1;
-  padding: 30px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 30px;
-}
-
-.task-container{
-  width: 100%;
-  max-width: 700px;
-
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-#taskInput{
-  flex: 1;
-  padding: 15px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
   font-size: 16px;
+  transition: background 0.2s, transform 0.2s;
 }
 
-#btnAdd{
-  padding: 15px 20px;
+#btnDark:hover {
+  background: rgba(255,255,255,0.25);
+  transform: scale(1.1);
+}
+
+#btnLogout {
+  padding: 8px 16px;
   border: none;
   border-radius: 8px;
-  background-color: #4f46e5;
+  background: rgba(255,255,255,0.2);
   color: white;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
-  transition: 0.3s;
-  font-weight: bold;
+  transition: background 0.2s;
 }
 
-#btnAdd:hover{
-  background-color: #372fcf;
+#btnLogout:hover {
+  background: rgba(255, 80, 80, 0.5);
 }
 
-.task-list{
-  width: 100%;
-  max-width: 700px;
-
+/* =====================
+   MAIN
+===================== */
+main {
+  flex: 1;
+  padding: 36px 24px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  align-items: center;
+  gap: 24px;
 }
 
-.task{
-  background-color: white;
-  padding: 15px;
-  border-radius: 10px;
+/* =====================
+   INPUT + BOTÃO
+===================== */
+.task-container {
+  width: 100%;
+  max-width: 680px;
+  display: flex;
+  gap: 10px;
+}
 
+#taskInput {
+  flex: 1;
+  padding: 14px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  background: var(--card);
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+#taskInput:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+}
+
+#taskInput::placeholder {
+  color: #c0c4cc;
+}
+
+#btnAdd {
+  padding: 14px 20px;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--primary);
+  color: white;
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+#btnAdd:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+#btnAdd:active {
+  transform: translateY(0);
+}
+
+/* =====================
+   LISTA DE TAREFAS
+===================== */
+.task-list {
+  width: 100%;
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.task {
+  background: var(--card);
+  padding: 16px 18px;
+  border-radius: 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 10px;
-
-  box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
-
-  transition: 0.3s;
+  gap: 12px;
+  box-shadow: var(--shadow);
+  border-left: 3px solid transparent;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  animation: taskEntrada 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.task:hover{
-  transform: translateY(-3px);
+@keyframes taskEntrada {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-.task-buttons{
+.task:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  border-left-color: var(--primary);
+}
+
+.task span {
+  font-size: 15px;
+  line-height: 1.4;
+  flex: 1;
+}
+
+.task-buttons {
   display: flex;
-  gap: 10px;
+  gap: 8px;
+  flex-shrink: 0;
 }
 
 .btnComplete,
-.btnDelete{
+.btnDelete {
   padding: 8px 12px;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
-  color: white;
-  transition: 0.3s;
+  font-size: 14px;
+  transition: opacity 0.2s, transform 0.1s;
 }
 
-.btnComplete{
-  background-color: #16a34a;
+.btnComplete {
+  background-color: #dcfce7;
+  color: var(--success);
 }
 
-.btnDelete{
-  background-color: #dc2626;
+.btnDelete {
+  background-color: #fee2e2;
+  color: var(--danger);
 }
 
 .btnComplete:hover,
-.btnDelete:hover{
-  opacity: 0.8;
+.btnDelete:hover {
+  opacity: 0.75;
+  transform: scale(1.08);
 }
 
-.completed{
+.completed {
+  border-left-color: var(--success) !important;
+  background-color: #f0fdf4;
+}
+
+.completed span {
   text-decoration: line-through;
-  opacity: 0.6;
-  background-color: #d1fae5;
+  opacity: 0.5;
 }
 
-footer{
+/* =====================
+   FOOTER
+===================== */
+footer {
   background-color: #111827;
-  color: white;
+  color: #9ca3af;
   text-align: center;
-  padding: 15px;
+  padding: 14px;
+  font-size: 13px;
 }
 
-/* DARK MODE */
-
-.dark{
-  background-color: #111827;
-  color: white;
+/* =====================
+   DARK MODE
+===================== */
+.dark {
+  --bg: #0f172a;
+  --card: #1e293b;
+  --text: #f1f5f9;
+  --text-muted: #94a3b8;
+  --border: #334155;
 }
 
-.dark .task{
-  background-color: #1f2937;
-  color: white;
+.dark #taskInput {
+  background: var(--card);
+  border-color: var(--border);
+  color: var(--text);
 }
 
-.dark #taskInput{
-  background-color: #374151;
-  color: white;
-  border: none;
+.dark .task {
+  background: var(--card);
+  color: var(--text);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
-.dark footer{
-  background-color: black;
+.dark .completed {
+  background-color: #132a1e;
 }
 
-/* RESPONSIVIDADE */
+.dark .btnComplete {
+  background-color: #14532d;
+  color: #4ade80;
+}
 
-@media(max-width: 768px){
+.dark .btnDelete {
+  background-color: #450a0a;
+  color: #f87171;
+}
 
-  header{
-    flex-direction: column;
-    gap: 15px;
+.dark footer {
+  background-color: #020617;
+}
+
+/* =====================
+   RESPONSIVIDADE
+===================== */
+@media (max-width: 600px) {
+  header {
+    padding: 14px 20px;
   }
 
-  .task{
+  .usuario-nome {
+    display: none;
+  }
+
+  .task-container {
+    flex-direction: column;
+  }
+
+  #btnAdd {
+    width: 100%;
+  }
+
+  .task {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .task-buttons{
+  .task-buttons {
     width: 100%;
     justify-content: flex-end;
   }
-
-  #btnAdd{
-    width: 100%;
-  }
-
 }

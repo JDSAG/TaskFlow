@@ -2,6 +2,20 @@
 
 // Importa as funções necessárias do SDK do Firebase
 // Estas importações são o motivo pelo qual seu <script> precisa ser type="module"
+
+// Verifica sessão
+const usuario = JSON.parse(sessionStorage.getItem("usuario"));
+if (!usuario) window.location.href = "index.html";
+
+// Mostra o nome no header
+document.getElementById("usuarioNome").textContent = `Olá, ${usuario.nome} 👋`;
+
+// Logout
+document.getElementById("btnLogout").addEventListener("click", () => {
+  sessionStorage.removeItem("usuario");
+  window.location.href = "index.html";
+});
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { 
     getFirestore, 

@@ -1,30 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin TaskFlow</title>
-    <link rel="stylesheet" href="/static/admin_style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Admin TaskFlow</title>
+
+  <link rel="stylesheet" href="/static/admin_style.css">
 </head>
+
 <body>
-    
-    <header>
-    <h1>📋 TaskFlow</h1>
-    <div class="container-buttons">
-    <button id="btnDark">🌙</button>
 
-    <button id="btnLogout">
-        Logout
-    </button>
+<header>
+    <div class="brand">
+      <h1>📋 TaskFlow</h1>
     </div>
-    </header>
+    <div class="header-actions">
+      <button id="btnDark">🌙</button>
+      <button id="btnLogout">Sair</button>
+    </div>
+  </header>
 
-    <main>
-    <section class="admin-panel">
 
-    </section>
-    </main>
+<main>
 
-<script src="adminScript.js"></script>
+  <section class="admin-panel">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+
+      <tbody id="corpoTabela">
+
+      </tbody>
+
+    </table>
+
+  </section>
+
+</main>
+
+
+<script type="module" src="/js/adminScript.js"></script>
+
 </body>
 </html>

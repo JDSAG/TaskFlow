@@ -3,51 +3,64 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>TaskFlow</title>
-
-  <!-- LINK DO CSS -->
-  <link rel="stylesheet" href="/static/user_style.css">
+  <title>TaskFlow — Login</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/login.css">
 </head>
 <body>
 
-  <header>
-    <h1>📋 TaskFlow</h1>
+  <div class="bg-grid"></div>
 
-    <button id="btnDark">
-      🌙
-    </button>
-  </header>
+  <div class="card">
 
-  <main>
+    <div class="brand">
+      <span class="brand-icon">📋</span>
+      <h1>TaskFlow</h1>
+      <p>Organize. Execute. Conclua.</p>
+    </div>
 
-    <section class="task-container">
+    <!-- ABAS -->
+    <div class="tabs">
+      <button class="tab active" id="tabLogin" onclick="trocarAba('login')">Entrar</button>
+      <button class="tab" id="tabRegistro" onclick="trocarAba('registro')">Cadastrar</button>
+      <div class="tab-indicator" id="tabIndicator"></div>
+    </div>
 
-      <input 
-        type="text" 
-        id="taskInput"
-        placeholder="Digite uma tarefa..."
-      >
+    <!-- FORM LOGIN -->
+    <div class="form-section" id="formLogin">
+      <div class="input-group">
+        <label>Email</label>
+        <input type="email" id="loginEmail" placeholder="seu@email.com">
+      </div>
+      <div class="input-group">
+        <label>Senha</label>
+        <input type="password" id="loginSenha" placeholder="••••••••">
+      </div>
+      <div class="mensagem" id="msgLogin"></div>
+      <button class="btn-primary" id="btnLogin">Entrar</button>
+    </div>
 
-      <button id="btnAdd">
-        Adicionar
-      </button>
+    <!-- FORM REGISTRO -->
+    <div class="form-section hidden" id="formRegistro">
+      <div class="input-group">
+        <label>Nome</label>
+        <input type="text" id="regNome" placeholder="Seu nome">
+      </div>
+      <div class="input-group">
+        <label>Email</label>
+        <input type="email" id="regEmail" placeholder="seu@email.com">
+      </div>
+      <div class="input-group">
+        <label>Senha</label>
+        <input type="password" id="regSenha" placeholder="Mínimo 6 caracteres">
+      </div>
+      <div class="mensagem" id="msgRegistro"></div>
+      <button class="btn-primary" id="btnRegistro">Criar conta</button>
+    </div>
 
-    </section>
+  </div>
 
-    <section class="task-list" id="taskList">
-
-    </section>
-
-  </main>
-
-  <footer>
-    Desenvolvido com HTML5, CSS3 e JavaScript
-  </footer>
-
-  <!-- LINK DO JS -->
-  <!-- Apenas o seu script, carregado como um módulo, que fará as importações -->
-  <script type="module" src="scripts.js"></script> 
-
+  <script type="module" src="/js/login.js"></script>
 </body>
 </html>

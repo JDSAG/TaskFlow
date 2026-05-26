@@ -3,40 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>TaskFlow</title>
-
-  <!-- LINK DO CSS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/static/user_style.css">
 </head>
 <body>
 
   <header>
-    <h1>📋 TaskFlow</h1>
-
-    <button id="btnDark">
-      🌙
-    </button>
+    <div class="brand">
+      <span>📋</span>
+      <h1>TaskFlow</h1>
+    </div>
+    <div class="header-actions">
+      <span class="usuario-nome" id="usuarioNome">Olá, ...</span>
+      <button id="btnDark">🌙</button>
+      <button id="btnLogout">Sair</button>
+    </div>
   </header>
 
   <main>
 
     <section class="task-container">
-
-      <input 
-        type="text" 
+      <input
+        type="text"
         id="taskInput"
-        placeholder="Digite uma tarefa..."
+        placeholder="Nova tarefa..."
       >
-
-      <button id="btnAdd">
-        Adicionar
-      </button>
-
+      <button id="btnAdd">+ Adicionar</button>
     </section>
 
     <section class="task-list" id="taskList">
-
+      <!-- tarefas injetadas pelo JS -->
     </section>
 
   </main>
@@ -45,9 +43,6 @@
     Desenvolvido com HTML5, CSS3 e JavaScript
   </footer>
 
-  <!-- LINK DO JS -->
-  <!-- Apenas o seu script, carregado como um módulo, que fará as importações -->
-  <script type="module" src="scripts.js"></script> 
-
+  <script type="module" src="/js/scripts.js"></script>
 </body>
 </html>
