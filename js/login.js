@@ -105,8 +105,8 @@ document.getElementById("btnRegistro").addEventListener("click", async () => {
     await addDoc(collection(db, "usuarios"), {
       nome,
       email,
-      senha,       // ⚠️ em produção real, nunca salve senha em texto puro
-      role: "admin",
+      senha,
+      role: "user",
       dataCriacao: new Date()
     });
 
