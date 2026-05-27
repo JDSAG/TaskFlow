@@ -110,30 +110,40 @@ document.getElementById("btnRegistro").addEventListener("click", async () => {
     mostrarMensagem("msgRegistro", "Nome invalido. Deve ter no mínimo 2 caracteres", "erro");
     return;
   }
-
   setLoading("btnRegistro", true);
-
+  
   try {
     // Verifica se email já existe
-    const q = query(collection(db, "usuarios"), where("email", "==", email));
-    const snapshot = await getDocs(q);
+    const queryEmail = query(collection(db, "usuarios"), where("email", "==", email));
+    const snapshotEmail = await getDocs(queryEmail);
 
-    if (!snapshot.empty) {
+    if (!snapshotEmail.empty) {
       mostrarMensagem("msgRegistro", "Este email já está cadastrado.", "erro");
       setLoading("btnRegistro", false);
       return;
     }
+
+    //Verificação de ADM
+    const role = email.endsWith("@admin.com") ? "admin":"user";
+    if(role === "admin"){
+      const queryAdminRole = query(collection(db, "usuarios"), where("role", "==", "admin"));
+      const snapshotAdminRole = await getDocs(queryAdminRole);
+
+      if (snapshotAdminRole.size >= 3) {
+      mostrarMensagem("msgRegistro", "Máximo: 3 Admin Users", "erro");
+      setLoading("btnRegistro", false);
+      return;
+    }
+  };
 
     // Cria o usuário no Firestore
     await addDoc(collection(db, "usuarios"), {
       nome,
       email,
       senha,
-      role: "user",
+      role,
       dataCriacao: new Date()
     });
-
-    
 
     mostrarMensagem("msgRegistro", "Conta criada! Faça login.", "sucesso");
 
@@ -195,6 +205,8 @@ document.getElementById("btnLogin").addEventListener("click", async () => {
       email: usuario.email,
       role: usuario.role
     }));
+
+
 
     mostrarMensagem("msgLogin", `Bem-vindo, ${usuario.nome}! 👋`, "sucesso");
 
